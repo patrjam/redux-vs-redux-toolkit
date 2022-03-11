@@ -1,3 +1,5 @@
+import services from "./index";
+
 const initialState = {
   loading: false,
   amount: 0,
@@ -135,4 +137,46 @@ export const accountReducer = (state = initialState, action) => {
     default:
       return state;
   }
+};
+
+export const depositMoneyToAccount = () => async (dispatch, getState) => {
+  dispatch(fetchDepositRequest());
+
+  let deposit;
+  try {
+    deposit = await services.account.depositMoney();
+  } catch (error) {
+    return dispatch(fetchDepositError("Sorry, all of your money was stolen."));
+  }
+
+  return dispatch(fetchDepositSuccess(deposit));
+};
+
+export const withdrawMoneyToAccount = () => async (dispatch, getState) => {
+  dispatch(fetchWithdrawRequest());
+
+  let withdrawMoney;
+
+  try {
+    withdrawMoney = await services.account.withdrawMoney();
+  } catch (error) {
+    return dispatch(fetchWithdrawError("Your money was stolen."));
+  }
+  return dispatch(fetchWithdrawSuccess(withdrawMoney));
+};
+
+export const depositInterestRateToAccount = () => (dispatch, getState) => {
+  dispatch(fetchDepositInterestRateRequest);
+
+  let depositInterestRate;
+  try {
+    depositInterestRate = services.account.depositInterestRateMoney();
+  } catch (error) {
+    return dispatch(
+      fetchDepositInterestRateError(
+        "Your 2% interest rate of money was stolen."
+      )
+    );
+  }
+  return dispatch(fetchDepositInterestRateSuccess(depositInterestRate));
 };

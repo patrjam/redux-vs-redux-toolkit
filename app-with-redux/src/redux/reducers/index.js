@@ -1,18 +1,15 @@
-// import { combineReducers } from "redux";
-// import {accountReducer1} from "./accountReducer";
+import {
+  depositMoney,
+  withdrawMoney,
+  depositInterestRateMoney,
+} from "../action-creator/account.service";
 
-// const reducers = combineReducers({
-//   account: accountReducer1,
-// });
+const services = {
+  account: {
+    depositMoney,
+    withdrawMoney,
+    depositInterestRateMoney,
+  },
+};
 
-// export default reducers;
-
-
-// const services = {
-//   // depositMoney: depositMoneyService,
-//   // withdrawMoney: withdrawMoneyService,
-//   // depositInterestRate: depositInterestRateService
-//   account: accountServices
-// }
-
-// export default services
+export default services;
