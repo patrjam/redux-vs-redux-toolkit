@@ -8,6 +8,7 @@ import {
 } from "./redux/reducers/accountReducer";
 
 function App() {
+  // todo unstable reference on selector - heavy consequences for app performance
   const state = useSelector((state) => state); //all state structure in store
 
   const dispatch = useDispatch();

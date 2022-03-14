@@ -9,5 +9,6 @@ window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
 
 export const store = createStore(accountReducer,
   composeEnhancers(
+    // todo use thunk.withExtraArgument(services)
 applyMiddleware(thunk))
 )

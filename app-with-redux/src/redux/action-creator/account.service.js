@@ -1,4 +1,10 @@
-const depositMoney = async () => {
+// todo rename file on services
+
+// todo let our simulated server be responsible for 'real' state
+let accountBalance = 0
+
+// todo we can have just one service something like 'changeAccountState' which will take delta amount
+const depositMoney = async (amount) => {
   const randomError = Math.floor(Math.random() * 4);
   return await new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -9,7 +15,8 @@ const depositMoney = async () => {
   });
 };
 
-const withdrawMoney = async () => {
+// todo delete as it is not needed
+const withdrawMoney = async (amount) => {
   const randomError = Math.floor(Math.random() * 5);
   return await new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -20,6 +27,7 @@ const withdrawMoney = async () => {
   });
 };
 
+// todo delete as it is not needed
 const depositInterestRateMoney = () => {
   const randomError = Math.floor(Math.random() * 3);
   if (randomError === 2) {

@@ -1,4 +1,5 @@
 import services from "./index";
+// todo services are not injected to thunks but used from imports -> badly testable thunks
 
 const initialState = {
   loading: false,
@@ -109,6 +110,7 @@ export const accountReducer = (state = initialState, action) => {
         amount: state.amount - action.payload,
         error: "",
       };
+      //todo remove duplicate
     case FETCH_DEPOSIT_FAILURE:
       return {
         loading: false,
@@ -139,6 +141,7 @@ export const accountReducer = (state = initialState, action) => {
   }
 };
 
+// todo move logic into thunk + write test
 export const depositMoneyToAccount = () => async (dispatch, getState) => {
   dispatch(fetchDepositRequest());
 
