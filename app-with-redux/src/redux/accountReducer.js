@@ -1,4 +1,4 @@
-import services from "./index";
+import { services } from "./services";
 // todo services are not injected to thunks but used from imports -> badly testable thunks
 
 const initialState = {
@@ -110,8 +110,7 @@ export const accountReducer = (state = initialState, action) => {
         amount: state.amount - action.payload,
         error: "",
       };
-      //todo remove duplicate
-    case FETCH_DEPOSIT_FAILURE:
+    case FETCH_WITHDRAW_FAILURE:
       return {
         loading: false,
         amount: 0,

@@ -1,7 +1,5 @@
-// todo rename file on services
-
 // todo let our simulated server be responsible for 'real' state
-let accountBalance = 0
+let accountBalance = 0;
 
 // todo we can have just one service something like 'changeAccountState' which will take delta amount
 const depositMoney = async (amount) => {

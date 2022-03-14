@@ -3,10 +3,9 @@ import {
   depositMoney,
   withdrawMoney,
   depositInterestRateMoney,
-} from "../action-creator/account.service";
+} from "./account.services";
 
-// todo in general we prefer named exports
-const services = {
+export const services = {
   account: {
     depositMoney,
     withdrawMoney,
@@ -14,4 +13,3 @@ const services = {
   },
 };
 
-export default services;
