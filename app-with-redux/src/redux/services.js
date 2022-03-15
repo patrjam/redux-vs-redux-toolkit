@@ -1,4 +1,3 @@
-// todo this file is not reducer - it is more service index - it belongs alongside with services
 import {
   depositMoney,
   withdrawMoney,

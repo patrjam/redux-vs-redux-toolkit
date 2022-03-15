@@ -1,6 +1,3 @@
-import { services } from "./services";
-// todo services are not injected to thunks but used from imports -> badly testable thunks
-
 const initialState = {
   loading: false,
   amount: 0,
@@ -141,7 +138,7 @@ export const accountReducer = (state = initialState, action) => {
 };
 
 // todo move logic into thunk + write test
-export const depositMoneyToAccount = () => async (dispatch, getState) => {
+export const depositMoneyToAccount = () => async (dispatch, getState, {services}) => {
   dispatch(fetchDepositRequest());
 
   let deposit;
@@ -154,7 +151,7 @@ export const depositMoneyToAccount = () => async (dispatch, getState) => {
   return dispatch(fetchDepositSuccess(deposit));
 };
 
-export const withdrawMoneyToAccount = () => async (dispatch, getState) => {
+export const withdrawMoneyToAccount = () => async (dispatch, getState, {services}) => {
   dispatch(fetchWithdrawRequest());
 
   let withdrawMoney;
@@ -167,7 +164,7 @@ export const withdrawMoneyToAccount = () => async (dispatch, getState) => {
   return dispatch(fetchWithdrawSuccess(withdrawMoney));
 };
 
-export const depositInterestRateToAccount = () => (dispatch, getState) => {
+export const depositInterestRateToAccount = () => (dispatch, getState, {services}) => {
   dispatch(fetchDepositInterestRateRequest);
 
   let depositInterestRate;
