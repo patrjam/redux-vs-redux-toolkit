@@ -1,14 +1,10 @@
 import {
-  depositMoney,
-  withdrawMoney,
-  depositInterestRateMoney,
+  changeAccountState
 } from "./account.services";
 
 export const services = {
   account: {
-    depositMoney,
-    withdrawMoney,
-    depositInterestRateMoney,
+    changeAccountState
   },
 };
 

@@ -143,7 +143,7 @@ export const depositMoneyToAccount = () => async (dispatch, getState, {services}
 
   let deposit;
   try {
-    deposit = await services.account.depositMoney();
+    deposit = await services.account.changeAccountState();
   } catch (error) {
     return dispatch(fetchDepositError("Sorry, all of your money was stolen."));
   }
@@ -157,19 +157,19 @@ export const withdrawMoneyToAccount = () => async (dispatch, getState, {services
   let withdrawMoney;
 
   try {
-    withdrawMoney = await services.account.withdrawMoney();
+    withdrawMoney = await services.account.changeAccountState();
   } catch (error) {
     return dispatch(fetchWithdrawError("Your money was stolen."));
   }
   return dispatch(fetchWithdrawSuccess(withdrawMoney));
 };
 
-export const depositInterestRateToAccount = () => (dispatch, getState, {services}) => {
-  dispatch(fetchDepositInterestRateRequest);
+export const depositInterestRateToAccount = () => async (dispatch, getState, {services}) => {
+  dispatch(fetchDepositInterestRateRequest());
 
   let depositInterestRate;
   try {
-    depositInterestRate = services.account.depositInterestRateMoney();
+    depositInterestRate = await services.account.changeAccountState();
   } catch (error) {
     return dispatch(
       fetchDepositInterestRateError(
