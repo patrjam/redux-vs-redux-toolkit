@@ -62,9 +62,10 @@ export const fetchDepositInterestRateRequest = () => {
   };
 };
 
-export const fetchDepositInterestRateSuccess = () => {
+export const fetchDepositInterestRateSuccess = (amount) => {
   return {
     type: FETCH_DEPOSIT_INTERESTRATE_SUCCESS,
+    payload: amount,
   };
 };
 
@@ -85,7 +86,7 @@ export const accountReducer = (state = initialState, action) => {
     case FETCH_DEPOSIT_SUCCESS:
       return {
         loading: false,
-        amount: state.amount + action.payload,
+        amount: action.payload,
         error: "",
       };
     case FETCH_DEPOSIT_FAILURE:
@@ -104,7 +105,7 @@ export const accountReducer = (state = initialState, action) => {
     case FETCH_WITHDRAW_SUCCESS:
       return {
         loading: false,
-        amount: state.amount - action.payload,
+        amount: action.payload,
         error: "",
       };
     case FETCH_WITHDRAW_FAILURE:
@@ -123,13 +124,13 @@ export const accountReducer = (state = initialState, action) => {
     case FETCH_DEPOSIT_INTERESTRATE_SUCCESS:
       return {
         loading: false,
-        amount: state.amount + state.amount * 0.2,
+        amount: action.payload,
         error: "",
       };
     case FETCH_DEPOSIT_INTERESTRATE_FAILURE:
       return {
         loading: false,
-        amount: state.amount - state.amount * 0.2,
+        amount: state.amount,
         error: action.payload,
       };
     default:
@@ -138,44 +139,54 @@ export const accountReducer = (state = initialState, action) => {
 };
 
 // todo move logic into thunk + write test
-export const depositMoneyToAccount = () => async (dispatch, getState, {services}) => {
-  dispatch(fetchDepositRequest());
+export const depositMoney =
+  () =>
+  async (dispatch, getState, { services }) => {
+    dispatch(fetchDepositRequest());
 
-  let deposit;
-  try {
-    deposit = await services.account.changeAccountState();
-  } catch (error) {
-    return dispatch(fetchDepositError("Sorry, all of your money was stolen."));
-  }
+    let deposit;
+    try {
+      deposit = await services.account.changeAccountState(1000);
+    } catch (error) {
+      return dispatch(
+        fetchDepositError("Sorry, all of your money was stolen.")
+      );
+    }
+    return dispatch(fetchDepositSuccess(deposit));
+  };
 
-  return dispatch(fetchDepositSuccess(deposit));
-};
+export const withdrawMoney =
+  () =>
+  async (dispatch, getState, { services }) => {
+    dispatch(fetchWithdrawRequest());
 
-export const withdrawMoneyToAccount = () => async (dispatch, getState, {services}) => {
-  dispatch(fetchWithdrawRequest());
+    let withdrawMoney;
 
-  let withdrawMoney;
+    try {
+      withdrawMoney = await services.account.changeAccountState(-1000);
+    } catch (error) {
+      return dispatch(fetchWithdrawError("Your money was stolen."));
+    }
+    return dispatch(fetchWithdrawSuccess(withdrawMoney));
+  };
 
-  try {
-    withdrawMoney = await services.account.changeAccountState();
-  } catch (error) {
-    return dispatch(fetchWithdrawError("Your money was stolen."));
-  }
-  return dispatch(fetchWithdrawSuccess(withdrawMoney));
-};
+export const depositInterestRate =
+  () =>
+  async (dispatch, getState, { services }) => {
+    dispatch(fetchDepositInterestRateRequest());
 
-export const depositInterestRateToAccount = () => async (dispatch, getState, {services}) => {
-  dispatch(fetchDepositInterestRateRequest());
+    let balance, interestRate, newBalance;
 
-  let depositInterestRate;
-  try {
-    depositInterestRate = await services.account.changeAccountState();
-  } catch (error) {
-    return dispatch(
-      fetchDepositInterestRateError(
-        "Your 2% interest rate of money was stolen."
-      )
-    );
-  }
-  return dispatch(fetchDepositInterestRateSuccess(depositInterestRate));
-};
+    balance = await services.account.actualBalance();
+    interestRate = balance * 0.02;
+
+    try {
+      newBalance = await services.account.changeAccountState(
+        interestRate,
+        true
+      );
+    } catch (error) {
+      return dispatch(fetchDepositInterestRateError("Sorry - some issue, no money added."));
+    }
+    return dispatch(fetchDepositInterestRateSuccess(newBalance));
+  };

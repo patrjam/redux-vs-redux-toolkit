@@ -1,10 +1,8 @@
-import {
-  changeAccountState
-} from "./account.services";
+import { changeAccountState, actualBalance } from "./account.services";
 
 export const services = {
   account: {
-    changeAccountState
+    changeAccountState,
+    actualBalance,
   },
 };
-

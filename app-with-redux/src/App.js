@@ -2,9 +2,9 @@ import "./App.css";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import {
-  depositInterestRateToAccount,
-  depositMoneyToAccount,
-  withdrawMoneyToAccount,
+  depositInterestRate,
+  depositMoney,
+  withdrawMoney,
 } from "./redux/accountReducer";
 import { getAmount, getError, getLoading } from "./redux/account.selectors";
 
@@ -21,19 +21,19 @@ function App() {
       <h1>{amount}$</h1>
       <button
         className="button"
-        onClick={() => dispatch(depositMoneyToAccount())}
+        onClick={() => dispatch(depositMoney())}
       >
         Deposit
       </button>
       <button
         className="button"
-        onClick={() => dispatch(withdrawMoneyToAccount())}
+        onClick={() => dispatch(withdrawMoney())}
       >
         Withdraw
       </button>
       <button
         className="button"
-        onClick={() => dispatch(depositInterestRateToAccount())}
+        onClick={() => dispatch(depositInterestRate())}
       >
         Deposit 2% interest rate
       </button>
