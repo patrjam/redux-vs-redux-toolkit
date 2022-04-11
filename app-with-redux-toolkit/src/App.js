@@ -10,9 +10,9 @@ function App() {
     <div className="App">
       <h2>Update state with redux-toolkit</h2>
       <h1>{ accountState }</h1>
-      <button onClick={() => dispatch(depositMoney(1000)) }>Deposit</button>
-      <button onClick={() => dispatch(withdrawMoney(1000))}>Withdraw</button>
-      <button onClick={()=> dispatch(depositInterestRate())}>Deposit 2% interest rate</button>
+      <button className="button" onClick={() => dispatch(depositMoney(1000)) }>Deposit</button>
+      <button className="button" onClick={() => dispatch(withdrawMoney(1000))}>Withdraw</button>
+      <button className="button" onClick={()=> dispatch(depositInterestRate())}>Deposit 2% interest rate</button>
     </div>
   );
 }
