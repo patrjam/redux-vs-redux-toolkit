@@ -1,9 +1,16 @@
-import { createStore, applyMiddleware } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
-import reducers from "./reducers/index";
+import { accountReducer } from "./accountReducer";
+import {services} from "../redux/services";
+
+const composeEnhancers =
+  (typeof window !== "undefined" &&
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
+  compose;
+
+const thunkMiddleware = thunk.withExtraArgument({ services: services });
 
 export const store = createStore(
-  reducers,
-  {}, //default state
-  applyMiddleware(thunk) //async fix
+  accountReducer,
+  composeEnhancers(applyMiddleware(thunkMiddleware))
 );
