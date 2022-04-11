@@ -1,7 +1,7 @@
 const initialState = {
   loading: false,
   amount: 0,
-  error: "",
+  error: null,
 };
 
 const FETCH_DEPOSIT_REQUEST = "FETCH_DEPOSIT_REQUEST";
@@ -87,7 +87,7 @@ export const accountReducer = (state = initialState, action) => {
       return {
         loading: false,
         amount: action.payload,
-        error: "",
+        error: null,
       };
     case FETCH_DEPOSIT_FAILURE:
       return {
@@ -106,7 +106,7 @@ export const accountReducer = (state = initialState, action) => {
       return {
         loading: false,
         amount: action.payload,
-        error: "",
+        error: null,
       };
     case FETCH_WITHDRAW_FAILURE:
       return {
@@ -125,7 +125,7 @@ export const accountReducer = (state = initialState, action) => {
       return {
         loading: false,
         amount: action.payload,
-        error: "",
+        error: null,
       };
     case FETCH_DEPOSIT_INTERESTRATE_FAILURE:
       return {

@@ -16,23 +16,23 @@ import {
 
 describe("reducer", () => {
   it("state after dispatching fetchDepositRequest", () => {
-    const previousState = { loading: false, amount: 0, error: "" };
-    const nextState = { loading: true, amount: 0, error: "" };
+    const previousState = { loading: false, amount: 0, error: null };
+    const nextState = { loading: true, amount: 0, error: null };
     expect(accountReducer(previousState, fetchDepositRequest())).toEqual(
       nextState
     );
   });
 
   it("state after dispatching fetchDepositSuccess", () => {
-    const previousState = { loading: true, amount: 0, error: "" };
-    const nextState = { loading: false, amount: 1000, error: "" };
+    const previousState = { loading: true, amount: 0, error: null };
+    const nextState = { loading: false, amount: 1000, error: null };
     expect(accountReducer(previousState, fetchDepositSuccess(1000))).toEqual(
       nextState
     );
   });
 
   it("state after dispatching fetchDepositError", () => {
-    const previousState = { loading: true, amount: 1000, error: "" };
+    const previousState = { loading: true, amount: 1000, error: null };
     const nextState = { loading: false, amount: 0, error: "Deposit stolen." };
     expect(
       accountReducer(previousState, fetchDepositError("Deposit stolen."))
@@ -40,23 +40,23 @@ describe("reducer", () => {
   });
 
   it("state after dispatching fetchWithdrawRequest", () => {
-    const previousState = { loading: false, amount: 1000, error: "" };
-    const nextState = { loading: true, amount: 1000, error: "" };
+    const previousState = { loading: false, amount: 1000, error: null };
+    const nextState = { loading: true, amount: 1000, error: null };
     expect(accountReducer(previousState, fetchWithdrawRequest())).toEqual(
       nextState
     );
   });
 
   it("state after dispatching fetchWithdrawSuccess", () => {
-    const previousState = { loading: true, amount: 1000, error: "" };
-    const nextState = { loading: false, amount: 0, error: "" };
+    const previousState = { loading: true, amount: 1000, error: null };
+    const nextState = { loading: false, amount: 0, error: null };
     expect(accountReducer(previousState, fetchWithdrawSuccess(0))).toEqual(
       nextState
     );
   });
 
   it("state after dispatching fetchWithdrawError", () => {
-    const previousState = { loading: true, amount: 1000, error: "" };
+    const previousState = { loading: true, amount: 1000, error: null };
     const nextState = { loading: false, amount: 0, error: "Withdraw stolen." };
     expect(
       accountReducer(previousState, fetchWithdrawError("Withdraw stolen."))
@@ -64,23 +64,23 @@ describe("reducer", () => {
   });
 
   it("state after dispatching fetchDepositInterestRateRequest", () => {
-    const previousState = { loading: false, amount: 2000, error: "" };
-    const nextState = { loading: true, amount: 2000, error: "" };
+    const previousState = { loading: false, amount: 2000, error: null };
+    const nextState = { loading: true, amount: 2000, error: null };
     expect(
       accountReducer(previousState, fetchDepositInterestRateRequest())
     ).toEqual(nextState);
   });
 
   it("state after dispatching fetchDepositInterestRateSuccess", () => {
-    const previousState = { loading: true, amount: 1000, error: "" };
-    const nextState = { loading: false, amount: 1020, error: "" };
+    const previousState = { loading: true, amount: 1000, error: null };
+    const nextState = { loading: false, amount: 1020, error: null };
     expect(
       accountReducer(previousState, fetchDepositInterestRateSuccess(1020))
     ).toEqual(nextState);
   });
 
   it("state after dispatching fetchDepositInterestRateError", () => {
-    const previousState = { loading: true, amount: 1020, error: "" };
+    const previousState = { loading: true, amount: 1020, error: null };
     const nextState = { loading: false, amount: 1020, error: "Some error." };
     expect(
       accountReducer(
