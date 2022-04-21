@@ -1,8 +1,8 @@
 import './App.css';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { depositMoney, withdrawMoney, depositInterestRate, depositMoney1 } from './redux/accountReducer';
 import { getAmount, getLoading, getError } from './redux/account.selectors';
+import { depositMoney, withdrawMoney, depositInterestRate } from './redux/accountSlice';
 
 function App() {
   const amount = useSelector(getAmount)
@@ -13,10 +13,9 @@ function App() {
   return (
     <div className="App">
       <h2>Update state with redux-toolkit</h2>
-      <h1>{ amount }</h1>
-      <button className="button" onClick={() => dispatch(depositMoney1(1))}>Depositt</button>
-      <button className="button" onClick={() => dispatch(depositMoney(1000)) }>Deposit</button>
-      <button className="button" onClick={() => dispatch(withdrawMoney(1000))}>Withdraw</button>
+      <h1>{amount}</h1>
+      <button className="button" onClick={() => dispatch(depositMoney())}>Deposit</button>
+      <button className="button" onClick={() => dispatch(withdrawMoney())}>Withdraw</button>
       <button className="button" onClick={() => dispatch(depositInterestRate())}>Deposit 2% interest rate</button>
       <h3>
         {loading ? (
