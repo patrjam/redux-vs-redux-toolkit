@@ -165,6 +165,7 @@ export const withdrawMoney =
     try {
       withdrawMoney = await services.account.changeAccountState(-1000);
     } catch (error) {
+      // todo you are swallowing error  - just discuss that do not expect case you are prepared for, let original error to be used somehow
       return dispatch(fetchWithdrawError("Your money was stolen."));
     }
     return dispatch(fetchWithdrawSuccess(withdrawMoney));
