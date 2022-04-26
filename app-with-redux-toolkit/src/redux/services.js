@@ -4,6 +4,7 @@ export const changeAccountState = async (
     deltaAmount,
     interestRateCalculation = false
 ) => {
+    // todo what about : const randomError = Math.random()<=0.25 ?
     const randomError = Math.floor(Math.random() * 4);
     return await new Promise((resolve, reject) => {
         setTimeout(() => {

@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { changeAccountState, actualBalance } from "./services";
 
+
+// todo inject services somehow - this would be hardly testable - if you decide to write tests ;)
 const initialState = {
   loading: false,
   amount: 0,
