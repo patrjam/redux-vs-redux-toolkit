@@ -138,7 +138,6 @@ export const accountReducer = (state = initialState, action) => {
   }
 };
 
-// todo move logic into thunk + write test
 export const depositMoney =
   () =>
   async (dispatch, getState, { services }) => {
@@ -149,7 +148,7 @@ export const depositMoney =
       deposit = await services.account.changeAccountState(1000);
     } catch (error) {
       return dispatch(
-        fetchDepositError("Sorry, all of your money was stolen.")
+        fetchDepositError(`Sorry, all of your money was stolen. Error ${error}`)
       );
     }
     return dispatch(fetchDepositSuccess(deposit));
@@ -165,7 +164,7 @@ export const withdrawMoney =
     try {
       withdrawMoney = await services.account.changeAccountState(-1000);
     } catch (error) {
-      return dispatch(fetchWithdrawError("Your money was stolen."));
+      return dispatch(fetchWithdrawError(`Your money was stolen. Error ${error}`));
     }
     return dispatch(fetchWithdrawSuccess(withdrawMoney));
   };
@@ -186,7 +185,7 @@ export const depositInterestRate =
         true
       );
     } catch (error) {
-      return dispatch(fetchDepositInterestRateError("Sorry - some issue, no money added."));
+      return dispatch(fetchDepositInterestRateError(`Sorry - some issue, no money added. Error ${error}`));
     }
     return dispatch(fetchDepositInterestRateSuccess(newBalance));
   };
