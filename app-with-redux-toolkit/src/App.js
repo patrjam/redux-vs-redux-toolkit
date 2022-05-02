@@ -13,7 +13,7 @@ function App() {
   return (
     <div className="App">
       <h2>Update state with redux-toolkit</h2>
-      <h1>{amount}</h1>
+      <h1>{amount}$</h1>
       <button className="button" onClick={() => dispatch(depositMoney())}>Deposit</button>
       <button className="button" onClick={() => dispatch(withdrawMoney())}>Withdraw</button>
       <button className="button" onClick={() => dispatch(depositInterestRate())}>Deposit 2% interest rate</button>
