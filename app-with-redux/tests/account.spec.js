@@ -90,6 +90,8 @@ describe("reducer", () => {
     ).toEqual(nextState);
   });
 
+
+   // todo i am missing unhappy path in thunk tests - you will need to inject different services
   describe("thunks", () => {
     let fetchedData, error;
 
