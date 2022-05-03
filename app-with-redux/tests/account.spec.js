@@ -93,13 +93,21 @@ describe("reducer", () => {
 
    // todo i am missing unhappy path in thunk tests - you will need to inject different services
   describe("thunks", () => {
-    let fetchedData;
+    let fetchedData, error;
 
     const services = {
       services: {
         account: {
           changeAccountState: () => Promise.resolve(fetchedData),
           actualBalance: () => Promise.resolve(),
+        },
+      },
+    };
+
+    const servicesWithFailure = {
+      services: {
+        account: {
+          changeAccountState: () => Promise.reject(error),
         },
       },
     };
@@ -123,6 +131,19 @@ describe("reducer", () => {
           extraArgs: services,
         })
       ).toEqual([fetchWithdrawRequest(), fetchWithdrawSuccess(fetchedData)]);
+    });
+
+    it("withdrawMoney unhappy path", async () => {
+      error = ":500: cent";
+      expect(
+        await getDispatchedActionsFromThunk({
+          thunk: withdrawMoney,
+          extraArgs: servicesWithFailure,
+        })
+      ).toEqual([
+        fetchWithdrawRequest(),
+        fetchWithdrawError("Your money was stolen. Error :500: cent"),
+      ]);
     });
 
     it("depositInterestRate", async () => {
