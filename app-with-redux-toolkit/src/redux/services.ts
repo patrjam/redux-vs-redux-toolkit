@@ -3,9 +3,9 @@ let accountBalance = 0;
 export const changeAccountState = async (
   deltaAmount: number,
   interestRateCalculation = false
-): Promise<number> => {
+) => {
   const randomError = Math.random() <= 0.75;
-  return await new Promise((resolve, reject) => {
+  return await new Promise<number>((resolve, reject) => {
     setTimeout(() => {
       randomError
         ? resolve((accountBalance = Math.round(accountBalance + deltaAmount)))
@@ -16,6 +16,6 @@ export const changeAccountState = async (
   });
 };
 
-export const actualBalance = (): number => {
+export const actualBalance = () => {
   return accountBalance;
 };

@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import accountSlice from "./accountSlice";
 import { changeAccountState, actualBalance } from "./services";
 
-const extraArgument = {
+export const extraArgument = {
   changeAccountState: async (count: number, interestRate = false) =>
     await changeAccountState(count, interestRate),
   actualBalance: () => actualBalance(),

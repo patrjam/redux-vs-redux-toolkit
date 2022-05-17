@@ -1,7 +1,7 @@
 import './App.css';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { getAmount, getLoading, getError } from './redux/account.selectors';
+import { getAmount, getLoading, getError, getState } from './redux/account.selectors';
 import { depositMoney, withdrawMoney, depositInterestRate } from './redux/accountSlice';
 
 function App() {

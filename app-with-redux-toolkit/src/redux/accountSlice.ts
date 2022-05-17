@@ -1,44 +1,23 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk } from "./helpers.types";
 
-type InitState = {
-  loading: boolean;
-  amount: number | unknown;
-  error: string;
-};
-
-type ExtraType = {
-  changeAccountState: (count: number, interestRate?: boolean) => number;
-  actualBalance: () => number;
-};
-
-const initialState = {
+export const initialState = {
   loading: false,
   amount: 0,
   error: "",
-} as InitState;
+};
 
-export const depositMoney = createAsyncThunk<
-  number,
-  void,
-  { extra: ExtraType }
->("depositMoney", async (_, { extra }) => {
-  console.log(extra);
+
+
+export const depositMoney = createAsyncThunk("depositMoney", async (_, { extra }) => {
   return await extra.changeAccountState(1000);
 });
 
-export const withdrawMoney = createAsyncThunk<
-  number,
-  void,
-  { extra: ExtraType }
->("withdrawMoney", async (_, { extra }) => {
+export const withdrawMoney = createAsyncThunk("withdrawMoney", async (_, {extra}) => {
   return await extra.changeAccountState(-1000);
 });
 
-export const depositInterestRate = createAsyncThunk<
-  number,
-  void,
-  { extra: ExtraType }
->("depositInterestRate", async (_, { extra }) => {
+export const depositInterestRate = createAsyncThunk("depositInterestRate", async (_, { extra }) => {
   let balance, interestRate, newBalance;
 
   balance = await extra.actualBalance();
@@ -48,14 +27,14 @@ export const depositInterestRate = createAsyncThunk<
   return newBalance;
 });
 
-export const accountSlice = createSlice({
+ export const accountSlice = createSlice({
   name: "account",
   initialState: {
-    account: initialState,
+    account: initialState
   },
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(depositMoney.fulfilled, (state, action) => {
+    builder.addCase(depositMoney.fulfilled, (state, action: PayloadAction<number, any, any, any>) => {
       state.account.amount = action.payload;
       state.account.error = "";
       state.account.loading = false;
@@ -82,7 +61,6 @@ export const accountSlice = createSlice({
       state.account.loading = true;
     });
     builder.addCase(depositInterestRate.fulfilled, (state, action) => {
-      console.log(action.payload);
       state.account.amount = action.payload;
       state.account.error = "";
       state.account.loading = false;
@@ -96,6 +74,6 @@ export const accountSlice = createSlice({
       state.account.loading = true;
     });
   },
-});
+}); 
 
 export default accountSlice.reducer;

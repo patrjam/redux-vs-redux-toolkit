@@ -1,10 +1,8 @@
-type State = {
+import { initialState } from "./accountSlice";
+
+export type State = {
   account: {
-    account: {
-      amount: number;
-      loading: boolean;
-      error: string;
-    };
+    account: typeof initialState;
   };
 };
 
