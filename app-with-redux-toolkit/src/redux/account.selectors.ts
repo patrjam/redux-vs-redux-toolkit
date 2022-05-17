@@ -1,10 +1,4 @@
-import { initialState } from "./accountSlice";
-
-export type State = {
-  account: {
-    account: typeof initialState;
-  };
-};
+import {State} from "./store"
 
 export const getState = (state: State) => state.account.account;
 export const getAmount = (state: State) => state.account.account.amount;

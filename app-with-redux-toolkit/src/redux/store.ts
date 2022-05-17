@@ -20,3 +20,5 @@ export const store = configureStore({
     account: accountSlice,
   },
 });
+
+export type State = ReturnType<typeof store.getState>

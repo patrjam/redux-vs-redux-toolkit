@@ -7,8 +7,6 @@ export const initialState = {
   error: "",
 };
 
-
-
 export const depositMoney = createAsyncThunk("depositMoney", async (_, { extra }) => {
   return await extra.changeAccountState(1000);
 });
@@ -34,7 +32,7 @@ export const depositInterestRate = createAsyncThunk("depositInterestRate", async
   },
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(depositMoney.fulfilled, (state, action: PayloadAction<number, any, any, any>) => {
+    builder.addCase(depositMoney.fulfilled, (state, action: PayloadAction<any, any, any>) => {
       state.account.amount = action.payload;
       state.account.error = "";
       state.account.loading = false;

@@ -1,5 +1,5 @@
 import { createAsyncThunk as _createAsyncThunk, AsyncThunkOptions, AsyncThunk, Dispatch } from "@reduxjs/toolkit";
-import { State } from "./account.selectors"
+import { State } from "./store"
 import { extraArgument } from "./store"
 
 
