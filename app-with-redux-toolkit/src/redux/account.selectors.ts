@@ -1,6 +1,15 @@
-import {State} from "./store"
+import { State } from "./store";
 
-export const getState = (state: State) => state.account.account;
-export const getAmount = (state: State) => state.account.account.amount;
-export const getLoading = (state: State) => state.account.account.loading;
-export const getError = (state: State) => state.account.account.error;
+const createSelectors = <
+  K extends string,
+  Selectors extends Record<K, (state: State) => any>
+>(
+  selectors: Selectors
+) => selectors;
+
+export const accountSelectors = createSelectors({
+  getState: (state) => state.account.account,
+  getAmount: (state) => state.account.account.amount,
+  getLoading: (state) => state.account.account.loading,
+  getError: (state) => state.account.account.error,
+});

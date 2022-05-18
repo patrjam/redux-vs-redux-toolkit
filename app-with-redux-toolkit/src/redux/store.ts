@@ -1,12 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import accountSlice from "./accountSlice";
+import {accountSliceReducer} from "./accountSlice";
 import { changeAccountState, actualBalance } from "./services";
 import { useDispatch } from 'react-redux'
 
 export const extraArgument = {
-  changeAccountState: async (count: number, interestRate = false) =>
-    await changeAccountState(count, interestRate),
-  actualBalance: () => actualBalance(),
+  changeAccountState,
+  actualBalance,
 };
 
 export const store = configureStore({
@@ -18,7 +17,7 @@ export const store = configureStore({
     }),
 
   reducer: {
-    account: accountSlice,
+    account: accountSliceReducer,
   },
 });
 
