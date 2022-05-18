@@ -1,10 +1,10 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "./helpers.types";
 
 export const initialState = {
   loading: false,
   amount: 0,
-  error: "",
+  error: null as string | null,
 };
 
 export const depositMoney = createAsyncThunk("depositMoney", async (_, { extra }) => {
@@ -32,9 +32,9 @@ export const depositInterestRate = createAsyncThunk("depositInterestRate", async
   },
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(depositMoney.fulfilled, (state, action: PayloadAction<any, any, any>) => {
+    builder.addCase(depositMoney.fulfilled, (state, action) => {
       state.account.amount = action.payload;
-      state.account.error = "";
+      state.account.error = null;
       state.account.loading = false;
     });
     builder.addCase(depositMoney.rejected, (state, action) => {
@@ -47,7 +47,7 @@ export const depositInterestRate = createAsyncThunk("depositInterestRate", async
     });
     builder.addCase(withdrawMoney.fulfilled, (state, action) => {
       state.account.amount = action.payload;
-      state.account.error = "";
+      state.account.error = null;
       state.account.loading = false;
     });
     builder.addCase(withdrawMoney.rejected, (state, action) => {
@@ -60,12 +60,12 @@ export const depositInterestRate = createAsyncThunk("depositInterestRate", async
     });
     builder.addCase(depositInterestRate.fulfilled, (state, action) => {
       state.account.amount = action.payload;
-      state.account.error = "";
+      state.account.error = null;
       state.account.loading = false;
     });
     builder.addCase(depositInterestRate.rejected, (state, action) => {
-      state.account.amount = action.payload || 0;
-      state.account.error = "Stolen money!";
+      state.account.amount = Number(action.error.message) || 0;
+      state.account.error = "Sorry, no interest rate bonus added!";
       state.account.loading = false;
     });
     builder.addCase(depositInterestRate.pending, (state, action) => {

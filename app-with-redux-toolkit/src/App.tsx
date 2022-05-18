@@ -1,15 +1,14 @@
 import './App.css';
 import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { getAmount, getLoading, getError, getState } from './redux/account.selectors';
+import { getAmount, getLoading, getError } from './redux/account.selectors';
 import { depositMoney, withdrawMoney, depositInterestRate } from './redux/accountSlice';
+import { useAppDispatch } from './redux/store';
 
 function App() {
   const amount = useSelector(getAmount)
   const loading = useSelector(getLoading)
   const error = useSelector(getError)
-  const dispatch = useDispatch()
-
+  const dispatch = useAppDispatch()
   return (
     <div className="App">
       <h2>Update state with redux-toolkit</h2>

@@ -17,7 +17,7 @@ declare type AsyncThunkConfig = {
   };
   export const createAsyncThunk = <Returned,  ThunkApiConfig extends AsyncThunkConfig, ThunkArg = void>(
     typePrefix: string,
-    payloadCreator: (arg: ThunkArg, config: AsyncThunkConfig) => Promise<any>,
+    payloadCreator: (arg: ThunkArg, config: AsyncThunkConfig) => Promise<Returned>,
     options?: AsyncThunkOptions<ThunkArg, ThunkApiConfig>
   ): AsyncThunk<Returned, ThunkArg, ThunkApiConfig> => 
       //@ts-expect-error
