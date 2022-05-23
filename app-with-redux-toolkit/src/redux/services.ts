@@ -1,3 +1,5 @@
+import { customDelay } from "./customFunctions/customDelay";
+
 let accountBalance = 0;
 
 export const changeAccountState = async (
@@ -6,22 +8,14 @@ export const changeAccountState = async (
 ) => {
   const randomError = Math.random() <= 0.75;
 
-  await delay(2000);
-  return randomError
-    ? (accountBalance = Math.round(accountBalance + deltaAmount))
-    : Promise.reject(
-        interestRateCalculation ? accountBalance : (accountBalance = 0)
-      );
+  await customDelay(2000);
+  if (randomError) {
+    return (accountBalance = Math.round(accountBalance + deltaAmount));
+  } else {
+    throw interestRateCalculation ? accountBalance : (accountBalance = 0);
+  }
 };
 
 export const actualBalance = () => {
   return accountBalance;
-};
-
-const delay = async (ms: number) => {
-  return new Promise<void>((resolve) => {
-    setTimeout(() => {
-      resolve();
-    }, ms);
-  });
 };
