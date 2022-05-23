@@ -1,11 +1,4 @@
-import { State } from "./store";
-
-const createSelectors = <
-  K extends string,
-  Selectors extends Record<K, (state: State) => any>
->(
-  selectors: Selectors
-) => selectors;
+import { createSelectors } from "../selectors.types";
 
 export const accountSelectors = createSelectors({
   getState: (state) => state.account.account,
