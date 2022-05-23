@@ -10,9 +10,12 @@ export const changeAccountState = async (
 
   await customDelay(2000);
   if (randomError) {
-    return (accountBalance = Math.round(accountBalance + deltaAmount));
+    let updatedBalance = Math.round(accountBalance + deltaAmount);
+    return (accountBalance = updatedBalance);
   } else {
-    throw interestRateCalculation ? accountBalance : (accountBalance = 0);
+    throw new Error(
+      String(interestRateCalculation ? accountBalance : (accountBalance = 0))
+    );
   }
 };
 
