@@ -1,6 +1,6 @@
-import { createSelectors } from "../selectors.types";
+import { identityTypedSelectors } from "../selectors.types";
 
-export const accountSelectors = createSelectors({
+export const accountSelectors = identityTypedSelectors({
   getState: (state) => state.account.account,
   getAmount: (state) => state.account.account.amount,
   getLoading: (state) => state.account.account.loading,
